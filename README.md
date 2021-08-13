@@ -1,4 +1,7 @@
-# PocketMine-Docker
+# PM4-Docker
+
+> **TODO:** Rewrite README and remove unused files from repository
+
 Hosts the files used to build pmmp/pocketmine-mp docker image
 
 ## What is this?
