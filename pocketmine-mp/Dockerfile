@@ -1,31 +1,27 @@
 # Build stage for compilation. Build tools like g++ will not be copied into the final stage to reduce image size.
 FROM ubuntu:18.04
-ARG PMMP_TAG
-RUN test ! -z ${PMMP_TAG} || (echo "Missing build-arg PMMP_TAG" && false)
 
 RUN apt-get update && apt-get install --no-install-recommends -y curl ca-certificates build-essential m4 gzip bzip2 bison git cmake autoconf automake pkg-config libtool libtool-bin re2c
 
 RUN mkdir /build
 WORKDIR /build
-RUN git clone https://github.com/pmmp/PocketMine-MP.git -b ${PMMP_TAG} --recursive .
+RUN git clone https://github.com/pmmp/PocketMine-MP.git -b master --recursive .
 WORKDIR /build/build/php
-RUN ./compile.sh -t linux64 -j ${THREADS:-$(grep -E ^processor /proc/cpuinfo | wc -l)} -f -u -g -l
+RUN ./compile.sh -t linux64 -j ${THREADS:-$(grep -E ^processor /proc/cpuinfo | wc -l)} -f -g
 RUN ln -s /build/build/php/bin/php7/bin/php /usr/bin/php
 
 WORKDIR /build
 RUN curl -L https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/bin/composer
 
-RUN composer install --classmap-authoritative --no-dev --prefer-source
-RUN php build/preprocessor/PreProcessor.php --path=src --multisize
-RUN php $(test -d resources || echo -n src/pocketmine/)resources/vanilla/.minify_json.php
-
-RUN php build/server-phar.php --git $(git rev-parse HEAD)
+# Set enable-dev-builds to true in pocketmine.yml to prevent startup errors
+RUN php -r "file_put_contents('resources/pocketmine.yml', str_replace('enable-dev-builds: false', 'enable-dev-builds: true', file_get_contents('resources/pocketmine.yml')));"
+RUN composer make-server
 # Just to make sure DevTools didn't false-positive-exit
 RUN test -f /build/PocketMine-MP.phar
 
 FROM ubuntu:18.04
-LABEL maintainer="PMMP Team <team@pmmp.io>"
+LABEL maintainer="KygekTeam <kygekteam@hotmail.com>"
 
 RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates wget
 
