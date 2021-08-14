@@ -2,7 +2,9 @@
 
 > **TODO:** Rewrite README and remove unused files from repository
 
-Hosts the files used to build pmmp/pocketmine-mp docker image
+Hosts the files used to build kygekteam/pocketmine-mp-4 Docker image.
+
+Head over to [Docker Hub](https://hub.docker.com/r/kygekteam/pocketmine-mp-4) to view the kygekteam/pocketmine-mp-4 Docker image repository.
 
 ## What is this?
 Docker lets you install software more easily by "copying the whole machine over".
@@ -14,7 +16,7 @@ To install Docker, refer to the [official Docker docs](https://docs.docker.com/i
 ## Explained Like I'm 5
 (If you prefer a more technical reference, there is a [Reference](#reference) section below)
 
-(You do NOT need to clone this repo to install PocketMine-Docker)
+(You do NOT need to clone this repo to install PM4-Docker)
 
 (Although this is an ELI5, you still need to know how to run commands on a Linux/MacOS machine and already have Docker installed)
 
@@ -37,10 +39,10 @@ sudo chown -R 1000:1000 data plugins
 `data` will store the server data, and `plugins` will store the server plugins.
 You can install plugins inside the `plugins` directory before starting the server.
 
-Now you can run PocketMine-Docker with the following command:
+Now you can run PM4-Docker with the following command:
 
 ```
-docker run -it -p 19132:19132/udp -v $PWD/data:/data -v $PWD/plugins:/plugins pmmp/pocketmine-mp
+docker run -it -p 19132:19132/udp -v $PWD/data:/data -v $PWD/plugins:/plugins kygekteam/pocketmine-mp-4
 ```
 
 Do NOT change the server port in server.properties.
@@ -101,7 +103,28 @@ Unlike early pmmp/pocketmine-mp images, this default user is no longer a sudoer,
 so plugins cannot acquire root access under normal circumstances.
 
 ## Building this image
-The Dockerfile requires a build-arg `PMMP_TAG` indicating the tree on pmmp/PocketMine-MP to checkout for building.
+1. Clone this GitHub repository using the following command:
+```sh
+$ git clone https://github.com/KygekTeam/PM4-Docker
+```
+
+2. Run `docker build` and wait until the build finishes
+```sh
+$ docker build -t pocketmine-mp-4 pocketmine-mp
+```
+
 Currently, this image does not support building from local PocketMine-MP source directories
 and always uses a tree from pmmp/PocketMine-MP on GitHub.
 However, this can be easily changed by simply changing the `git clone` command.
+
+## Additional Information
+
+This GitHub repository was forked from [pmmp's PocketMine-Docker](https://github.com/pmmp/PocketMine-Docker) GitHub repository.
+This GitHub repository has been modified by KygekTeam to build PocketMine-MP 4 instead of PocketMine-MP 3.
+
+You can contribute, suggest or report an issue by submitting [pull requests](https://github.com/KygekTeam/PM4-Docker/pulls) or [issues](https://github.com/KygekTeam/PM4-Docker/issues) in this GitHub repository, which will be reviewed by KygekTeam staffs.
+Should you need assistance from our team, please join the [KygekTeam Discord server](https://discord.gg/CXtqUZv).
+
+### Credits
+
+All credits goes to [pmmp](https://github.com/pmmp), as the original repository developers.
