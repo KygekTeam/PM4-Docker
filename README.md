@@ -108,7 +108,12 @@ so plugins cannot acquire root access under normal circumstances.
 $ git clone https://github.com/KygekTeam/PM4-Docker
 ```
 
-2. Run `docker build` and wait until the build finishes
+2. Change directory to the cloned PM4-Docker GitHub repository:
+```sh
+$ cd PM4-Docker
+```
+
+3. Run `docker build` and wait until the build has finished:
 ```sh
 $ docker build -t pocketmine-mp-4 pocketmine-mp
 ```
