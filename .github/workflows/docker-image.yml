@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout GitHub Repository
+      uses: actions/checkout@v2
+    - name: Login to Docker
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Build the Docker image
+      run: docker build -t kygekteam/pocketmine-mp-4 pocketmine-mp
+    - name: Push the Docker image to Docker Hub
+      run: docker push kygekteam/pocketmine-mp-4
