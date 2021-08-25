@@ -3,6 +3,12 @@ name: Docker Image CI
 on:
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason to run'
+        required: false
+        default: 'Building the latest PMMP 4 Docker image'
 
 jobs:
   docker:
