@@ -1,5 +1,7 @@
 # PM4-Docker
 
+[![Docker Image CI](https://github.com/KygekTeam/PM4-Docker/actions/workflows/docker-image.yml/badge.svg?branch=master)](https://github.com/KygekTeam/PM4-Docker/actions/workflows/docker-image.yml)
+
 > **TODO:** Rewrite README and remove unused files from repository
 
 Hosts the files used to build kygekteam/pocketmine-mp-4 Docker image.
