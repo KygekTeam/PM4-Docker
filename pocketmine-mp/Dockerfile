@@ -16,6 +16,7 @@ RUN mv composer.phar /usr/bin/composer
 
 # Set enable-dev-builds to true in pocketmine.yml to prevent startup errors
 RUN php -r "file_put_contents('resources/pocketmine.yml', str_replace('enable-dev-builds: false', 'enable-dev-builds: true', file_get_contents('resources/pocketmine.yml')));"
+RUN php resources/vanilla/.minify_json.php
 RUN composer make-server
 # Just to make sure DevTools didn't false-positive-exit
 RUN test -f /build/PocketMine-MP.phar
