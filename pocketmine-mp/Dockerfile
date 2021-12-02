@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y curl ca-certifi
 
 RUN mkdir /build
 WORKDIR /build
-RUN git clone https://github.com/pmmp/PocketMine-MP.git -b master --recursive .
+RUN git clone https://github.com/pmmp/PocketMine-MP.git -b stable --recursive .
 WORKDIR /build/build/php
 RUN ./compile.sh -t linux64 -j ${THREADS:-$(grep -E ^processor /proc/cpuinfo | wc -l)} -f -g
 RUN ln -s /build/build/php/bin/php7/bin/php /usr/bin/php
