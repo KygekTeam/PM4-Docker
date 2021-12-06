@@ -1,7 +1,7 @@
 # Build stage for compilation. Build tools like g++ will not be copied into the final stage to reduce image size.
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install --no-install-recommends -y curl ca-certificates build-essential m4 gzip bzip2 bison git cmake autoconf automake pkg-config libtool libtool-bin re2c
+RUN apt-get update && apt-get install --no-install-recommends -y curl ca-certificates build-essential m4 gzip bzip2 bison git cmake autoconf automake pkg-config libtool libtool-bin re2c wget
 
 RUN mkdir /build
 WORKDIR /build
@@ -11,7 +11,7 @@ RUN ./compile.sh -t linux64 -j ${THREADS:-$(grep -E ^processor /proc/cpuinfo | w
 RUN ln -s /build/build/php/bin/php7/bin/php /usr/bin/php
 
 WORKDIR /build
-RUN curl -L https://getcomposer.org/installer | php
+RUN wget https://getcomposer.org/download/latest-stable/composer.phar
 RUN mv composer.phar /usr/bin/composer
 
 # Set enable-dev-builds to true in pocketmine.yml to prevent startup errors
