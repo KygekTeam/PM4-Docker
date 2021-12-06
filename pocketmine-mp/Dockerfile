@@ -12,6 +12,7 @@ RUN ln -s /build/build/php/bin/php7/bin/php /usr/bin/php
 
 WORKDIR /build
 RUN wget https://getcomposer.org/download/latest-stable/composer.phar
+RUN chmod +x composer.phar
 RUN mv composer.phar /usr/bin/composer
 
 # Set enable-dev-builds to true in pocketmine.yml to prevent startup errors
