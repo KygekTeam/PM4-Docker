@@ -1,12 +1,10 @@
 # PM4-Docker
 
+### IMPORTANT: The KygekTeam PM4 Docker image has been disabled. Please use the [official PocketMine-MP Docker image](https://github.com/pmmp/PocketMine-Docker) instead.
+
+---
+
 [![Docker Image CI](https://github.com/KygekTeam/PM4-Docker/actions/workflows/docker-image.yml/badge.svg?branch=master)](https://github.com/KygekTeam/PM4-Docker/actions/workflows/docker-image.yml)
-
-### IMPORTANT: Some services will be discontinued 15 days after the public release of PocketMine-MP 4. Please read the screenshot below carefully before using any of our PM4 services.
-
-![PM4 Discontinuation Notice](https://kygek.team/images/hotlink-ok/discontinuation_notice.png)
-
-> **TODO:** Rewrite README and remove unused files from repository
 
 Hosts the files used to build kygekteam/pocketmine-mp-4 Docker image.
 
